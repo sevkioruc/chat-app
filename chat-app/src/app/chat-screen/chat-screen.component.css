@@ -1,0 +1,33 @@
+.wrapper {
+    margin-left: 100px;
+}
+
+.header-wrapper {
+    margin-bottom:50px;
+}
+
+.header {
+    margin-top: 50px;
+}
+
+.room {
+    margin-left: 50px; 
+    margin-right: 50px;   
+}
+
+.buttons-wrapper {
+    margin-top: 8px;
+}
+
+.message-layout {
+    height: 400px;
+}
+
+.join-btn {
+    margin-right:15px;
+}
+
+.send-btn-wrapper {
+    margin-top: 5px;
+    margin-left: 135px;
+}

@@ -1,0 +1,33 @@
+<div class="mat-typography wrapper" fxLayout="column">
+    <div class="header-wrapper" fxLayout="row">
+        <h1 class="header">Real Time Chat Application</h1>
+    </div>
+    <form [formGroup]="chatForm" fxLayout="row">
+        <mat-form-field class="username" fxFlex="20">
+            <input type="text" matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+        <mat-form-field class="room" fxFlex="20">
+            <mat-label>Select Room</mat-label>
+            <mat-select formControlName="room">
+                <mat-option *ngFor="let room of rooms" [value]="room.id">
+                {{room.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="buttons-wrapper">
+            <button mat-flat-button class="join-btn" color="primary">Join</button>
+            <button mat-stroked-button class="leave-btn" color="primary">Leave</button>
+        </div>
+    </form>
+    <div class="message-layout-wrapper" fxLayout="row">
+        <mat-card class="message-layout" fxFlex="43">Simple card</mat-card>
+    </div>
+    <div fxLayout="row">
+        <mat-form-field class="message-input" fxFlex="43">
+            <input type="text" matInput>
+        </mat-form-field>
+        <div class="send-btn-wrapper">
+            <button mat-flat-button class="send-btn" color="warn">Send</button>
+        </div>
+    </div>
+</div>

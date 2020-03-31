@@ -3,21 +3,27 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './navbar/navbar.component';
-import {MatButtonModule, MatToolbarModule} from '@angular/material';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { MatButtonModule, MatToolbarModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatCardModule} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChatScreenComponent } from './chat-screen/chat-screen.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    ChatScreenComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,18 +9,22 @@
         <mat-form-field class="room" fxFlex="20">
             <mat-label>Select Room</mat-label>
             <mat-select formControlName="room">
-                <mat-option *ngFor="let room of rooms" [value]="room.id">
+                <mat-option *ngFor="let room of rooms" [value]="room">
                 {{room.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <div class="buttons-wrapper">
-            <button mat-flat-button class="join-btn" color="primary">Join</button>
+            <button mat-flat-button class="join-btn" color="primary" (click)="join()">Join</button>
             <button mat-stroked-button class="leave-btn" color="primary">Leave</button>
         </div>
     </form>
     <div class="message-layout-wrapper" fxLayout="row">
-        <mat-card class="message-layout" fxFlex="43">Simple card</mat-card>
+        <mat-card class="message-layout" fxFlex="43">
+            <li *ngFor="let message of messages">
+                {{message}}
+            </li>
+        </mat-card>
     </div>
     <div fxLayout="row">
         <mat-form-field class="message-input" fxFlex="43">

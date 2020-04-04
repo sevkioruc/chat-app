@@ -9,7 +9,7 @@ export class WebSocketService {
 
   socket: any;
 
-  private readonly baseURI = 'http://localhost:3001';
+  private readonly baseURI = 'http://localhost:3002';
 
   constructor() {
     this.socket = io(this.baseURI);

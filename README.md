@@ -1,4 +1,7 @@
-![alt text](video.gif)
+<video width="320" height="240" controls>
+  <source src="chat-app/video.mp4" type="video/mp4">
+</video>
+
 # ChatApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.24.

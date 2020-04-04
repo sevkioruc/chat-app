@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 export class WebSocketService {
 
   socket: any;
-  private readonly baseURI = 'http://localhost:3000';
+
+  private readonly baseURI = 'http://localhost:3001';
 
   constructor() {
     this.socket = io(this.baseURI);
   }
-
 
   listen(eventName: string) {
     return new Observable((subscriber) => {

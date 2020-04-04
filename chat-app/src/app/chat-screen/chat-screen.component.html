@@ -15,8 +15,8 @@
             </mat-select>
         </mat-form-field>
         <div class="buttons-wrapper">
-            <button mat-flat-button class="join-btn" color="primary" (click)="join()">Join</button>
-            <button mat-stroked-button class="leave-btn" color="primary">Leave</button>
+            <button mat-flat-button class="join-btn" color="primary" (click)="join()" [disabled]="joinButtonState">Join</button>
+            <button mat-stroked-button class="leave-btn" color="primary" (click)="leave()" [disabled]="leaveButtonState">Leave</button>
         </div>
     </form>
     <div class="message-layout-wrapper" fxLayout="row">
@@ -31,7 +31,7 @@
             <input type="text" matInput [(ngModel)]="messageInput">
         </mat-form-field>
         <div class="send-btn-wrapper">
-            <button mat-flat-button class="send-btn" (click)="sendMessage()" color="warn">Send</button>
+            <button mat-flat-button class="send-btn" (click)="sendMessage()" color="warn" [disabled]="sendButtonState">Send</button>
         </div>
     </div>
 </div>

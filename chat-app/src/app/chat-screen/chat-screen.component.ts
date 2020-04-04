@@ -10,12 +10,26 @@ import { WebSocketService } from '../services/web-socket.service';
 export class ChatScreenComponent implements OnInit {
 
   chatForm: FormGroup;
-  messages: string[] = [];
+
+  roomObj: Room;
+  userInfo: string;
+
+  joinButtonState: boolean;
+  leaveButtonState: boolean;
+  sendButtonState: boolean;
+
   messageInput: string;
+  messages: string[] = [];
+
   rooms: Room[] = [{id: 1, name: 'Room1'}, {id: 2, name: 'Room2'}];
 
   constructor(private formBuilder: FormBuilder,
               private webSocketService: WebSocketService) {
+
+      this.joinButtonState = false;
+      this.leaveButtonState = true;
+      this.sendButtonState = true;
+
   }
 
   ngOnInit() {
@@ -28,10 +42,14 @@ export class ChatScreenComponent implements OnInit {
       this.messages.push(data);
     });
 
-    this.webSocketService.listen('broadcast-message-by-server')
-      .subscribe((message: string) => {
-        this.messages.push(message);
-      });
+    this.webSocketService.listen('broadcast-message-by-server').subscribe((message: string) => {
+      this.messages.push(message);
+    });
+
+    this.webSocketService.listen('leaved-user').subscribe((data: string) => {
+      this.messages.push(data);
+    });
+
   }
 
   join() {
@@ -40,12 +58,32 @@ export class ChatScreenComponent implements OnInit {
       room: this.chatForm.value.room
     };
 
-    this.webSocketService.emit('join-room', data);
-    this.chatForm.reset();
+    if (data.user && data.room) {
+      this.webSocketService.emit('join-room', data);
+
+      this.joinButtonState = true;
+      this.leaveButtonState = false;
+      this.sendButtonState = false;
+
+      this.userInfo = data.user;
+      this.roomObj = data.room;
+
+      this.chatForm.reset();
+    } else {
+      alert ('Missing information !');
+    }
+  }
+
+  leave() {
+    this.webSocketService.emit('leave-room', {user: this.userInfo, room: this.roomObj});
+
+    this.joinButtonState = false;
+    this.leaveButtonState = true;
+    this.sendButtonState = true;
   }
 
   sendMessage() {
-    this.webSocketService.emit('send-message', this.messageInput);
+    this.webSocketService.emit('send-message', {room: this.roomObj, message: this.messageInput});
     this.messageInput = '';
   }
 

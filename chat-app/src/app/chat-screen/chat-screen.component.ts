@@ -10,8 +10,9 @@ import { WebSocketService } from '../services/web-socket.service';
 export class ChatScreenComponent implements OnInit {
 
   chatForm: FormGroup;
-  rooms: Room[] = [{id: 1, name: 'Room1'}, {id: 2, name: 'Room2'}];
   messages: string[] = [];
+  messageInput: string;
+  rooms: Room[] = [{id: 1, name: 'Room1'}, {id: 2, name: 'Room2'}];
 
   constructor(private formBuilder: FormBuilder,
               private webSocketService: WebSocketService) {
@@ -27,6 +28,10 @@ export class ChatScreenComponent implements OnInit {
       this.messages.push(data);
     });
 
+    this.webSocketService.listen('broadcast-message-by-server')
+      .subscribe((message: string) => {
+        this.messages.push(message);
+      });
   }
 
   join() {
@@ -36,8 +41,12 @@ export class ChatScreenComponent implements OnInit {
     };
 
     this.webSocketService.emit('join-room', data);
-
     this.chatForm.reset();
+  }
+
+  sendMessage() {
+    this.webSocketService.emit('send-message', this.messageInput);
+    this.messageInput = '';
   }
 
 }

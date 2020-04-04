@@ -28,10 +28,10 @@
     </div>
     <div fxLayout="row">
         <mat-form-field class="message-input" fxFlex="43">
-            <input type="text" matInput>
+            <input type="text" matInput [(ngModel)]="messageInput">
         </mat-form-field>
         <div class="send-btn-wrapper">
-            <button mat-flat-button class="send-btn" color="warn">Send</button>
+            <button mat-flat-button class="send-btn" (click)="sendMessage()" color="warn">Send</button>
         </div>
     </div>
 </div>

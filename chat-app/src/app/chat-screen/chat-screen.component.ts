@@ -61,13 +61,10 @@ export class ChatScreenComponent implements OnInit {
     if (data.user && data.room) {
       this.webSocketService.emit('join-room', data);
 
-      this.joinButtonState = true;
-      this.leaveButtonState = false;
-      this.sendButtonState = false;
-
       this.userInfo = data.user;
       this.roomObj = data.room;
 
+      this.changeButtonState();
       this.chatForm.reset();
     } else {
       alert ('Missing information !');
@@ -76,15 +73,18 @@ export class ChatScreenComponent implements OnInit {
 
   leave() {
     this.webSocketService.emit('leave-room', {user: this.userInfo, room: this.roomObj});
-
-    this.joinButtonState = false;
-    this.leaveButtonState = true;
-    this.sendButtonState = true;
+    this.changeButtonState();
   }
 
   sendMessage() {
     this.webSocketService.emit('send-message', {room: this.roomObj, message: this.messageInput});
     this.messageInput = '';
+  }
+
+  private changeButtonState() {
+    this.joinButtonState = !this.joinButtonState;
+    this.leaveButtonState = !this.leaveButtonState;
+    this.sendButtonState = !this.sendButtonState;
   }
 
 }
